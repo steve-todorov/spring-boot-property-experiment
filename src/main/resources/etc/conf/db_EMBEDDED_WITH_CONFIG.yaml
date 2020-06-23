@@ -1,5 +1,5 @@
 strongbox.db:
-  cassandraFile: ${strongbox.home}/etc/conf/db_EMBEDDED.yaml
+  cassandraFile: ${strongbox.home}/etc/conf/cassandra-embedded.yaml
   janusgraph:
     index:
       elasticsearch:
