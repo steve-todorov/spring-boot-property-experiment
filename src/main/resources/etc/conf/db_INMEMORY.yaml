@@ -1,0 +1,4 @@
+strongbox.db:
+  janusgraph:
+    storage:
+      backend: inmemory

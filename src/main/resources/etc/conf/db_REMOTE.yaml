@@ -1,0 +1,26 @@
+strongbox.db:
+  janusgraph:
+    index:
+      elasticsearch:
+        backend: elasticsearch
+        hostname: 127.0.0.1
+        port: 9300
+    metrics:
+      enabled: true
+      jmx.enabled: true
+    storage:
+      backend: cql
+      hostname: 127.0.0.1
+      port: 49142
+      username: cassandra
+      password: cassandra
+      root: ${strongbox.vault}/db/janusgraph
+      cql:
+        read-consistency-level: QUORUM
+        write-consistency-level: QUORUM
+        replication-factor: 3
+      lock:
+        wait-time: 20
+        retries: 20
+    tx:
+      log-tx: true

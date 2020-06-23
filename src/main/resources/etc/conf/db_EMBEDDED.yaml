@@ -1,0 +1,51 @@
+strongbox.db:
+  cassandra:
+    storage-root: ${strongbox.vault}/db/cassandra
+    auto-snapshot: false
+    num-tokens: 10
+    concurrent-reads: 32
+    concurrent-writes: 32
+    concurrent-counter-writes: 32
+    concurrent-materialized-view-writes: 32
+    listen-address: 127.0.0.1
+    storage-port: 7010
+    storage-ssl-port: 7011
+    native-transport-port: 9042
+    native-transport-max-threads: 256
+    data-file-directories:
+      - ${strongbox.vault}/db/cassandra/data
+    seed_provider:
+      # Addresses of hosts that are deemed contact points.
+      # Cassandra nodes use this list of hosts to find each other and learn
+      # the topology of the ring.  You must change this if you are running
+      # multiple nodes!
+      - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+        parameters:
+          # seeds is actually a comma-delimited list of addresses.
+          # Ex: "<ip1>,<ip2>,<ip3>"
+          - seeds: "127.0.0.1"
+  janusgraph:
+    index:
+      elasticsearch:
+        backend: elasticsearch
+        hostname: 127.0.0.1
+        port: 9300
+    metrics:
+      enabled: true
+      jmx.enabled: true
+    storage:
+      backend: cql
+      hostname: 127.0.0.1
+      port: 49142
+      username: cassandra
+      password: cassandra
+      root: ${strongbox.vault}/db/janusgraph
+      cql:
+        read-consistency-level: 1
+        write-consistency-level: 1
+        replication-factor: 1
+      lock:
+        wait-time: 10
+        retries: 20
+    tx:
+      log-tx: true

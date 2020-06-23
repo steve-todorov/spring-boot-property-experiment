@@ -1,0 +1,27 @@
+strongbox.db:
+  cassandraFile: ${strongbox.home}/etc/conf/db_EMBEDDED.yaml
+  janusgraph:
+    index:
+      elasticsearch:
+        backend: elasticsearch
+        hostname: 127.0.0.1
+        port: 9300
+    metrics:
+      enabled: true
+      jmx.enabled: true
+    storage:
+      backend: cql
+      hostname: 127.0.0.1
+      port: 49142
+      username: cassandra
+      password: cassandra
+      root: ${strongbox.vault}/db/janusgraph
+      cql:
+        read-consistency-level: 1
+        write-consistency-level: 1
+        replication-factor: 1
+      lock:
+        wait-time: 10
+        retries: 20
+    tx:
+      log-tx: true
